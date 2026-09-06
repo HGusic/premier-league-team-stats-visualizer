@@ -314,11 +314,11 @@ export function StatRadarProfile({
   }, []);
 
   const compact = width < 340;
-  const chartHeight = compact ? 300 : width < 420 ? 340 : 380;
-  const outerRadius = compact ? "58%" : "68%";
+  const chartHeight = compact ? 250 : width < 420 ? 280 : 310;
+  const outerRadius = compact ? "72%" : "78%";
   const chartMargin = compact
-    ? { top: 18, right: 14, bottom: 1, left: 14 }
-    : { top: 22, right: 22, bottom: 1, left: 22 };
+    ? { top: 6, right: 8, bottom: 0, left: 8 }
+    : { top: 8, right: 12, bottom: 0, left: 12 };
 
   const data = useMemo((): RadarPoint[] => {
     return metrics.map((metric) => {
@@ -531,9 +531,14 @@ function AngleTick({
   const ox = px + (dx / dist) * push;
   const oy = py + (dy / dist) * push;
 
+  // Top/bottom labels stay on one line; left/right wrap one word per line.
+  const isSideLabel = Math.abs(dx) > Math.abs(dy);
+  const nameLines = isSideLabel ? words : [words.join(" ")].filter(Boolean);
+
   const lineHeight = compact ? 10 : 12;
-  const nameStartDy = words.length > 1 ? (compact ? -8 : -10) : compact ? -2 : -4;
-  const valueDy = nameStartDy + words.length * lineHeight + (compact ? 2 : 3);
+  const nameStartDy =
+    nameLines.length > 1 ? (compact ? -8 : -10) : compact ? -2 : -4;
+  const valueDy = nameStartDy + nameLines.length * lineHeight + (compact ? 2 : 3);
 
   return (
     <g transform={`translate(${ox},${oy})`}>
@@ -542,9 +547,9 @@ function AngleTick({
         fill="rgba(238, 242, 246, 0.92)"
         fontSize={compact ? 9 : 11}
       >
-        {words.map((word, index) => (
-          <tspan key={`${word}-${index}`} x={0} dy={index === 0 ? nameStartDy : lineHeight}>
-            {word}
+        {nameLines.map((line, index) => (
+          <tspan key={`${line}-${index}`} x={0} dy={index === 0 ? nameStartDy : lineHeight}>
+            {line}
           </tspan>
         ))}
       </text>
