@@ -1,0 +1,312 @@
+.shell {
+  min-height: 100vh;
+  --team-color: #c8102e;
+  background:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--team-color) 28%, transparent),
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--team-color) 22%, #0f1419) 0%,
+      color-mix(in srgb, var(--team-color) 10%, #171d25) 45%,
+      #10151b 100%
+    );
+  color: #eef2f6;
+  font-family: var(--font-geist-sans), "Segoe UI", sans-serif;
+  transition: background 280ms ease;
+}
+
+.teamBar {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 12, 16, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.teamScroller {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.teamScroller::-webkit-scrollbar {
+  height: 6px;
+}
+
+.teamScroller::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+}
+
+.teamTrack {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.55rem;
+  width: max-content;
+  padding-bottom: 0.15rem;
+}
+
+.teamChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  border-radius: 999px;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.teamChipActive {
+  border-color: color-mix(in srgb, var(--team-color) 80%, white);
+  background: color-mix(in srgb, var(--team-color) 28%, transparent);
+}
+
+.averageChip {
+  border-color: rgba(78, 161, 255, 0.55);
+  background: rgba(78, 161, 255, 0.12);
+  font-weight: 600;
+}
+
+.averageChip.teamChipActive {
+  border-color: rgba(78, 161, 255, 0.95);
+  background: rgba(78, 161, 255, 0.28);
+}
+
+.teamLogo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.menuBar {
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.55rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(12, 17, 23, 0.9);
+}
+
+.menuItem {
+  border: none;
+  background: transparent;
+  color: rgba(238, 242, 246, 0.7);
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font: inherit;
+}
+
+.menuItemActive {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.main {
+  padding: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.panel {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.titleChip {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.titleRank {
+  margin-right: 0;
+  padding: 0.12rem 0.5rem;
+  border-radius: 0.35rem;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: 1.25;
+  font-weight: inherit;
+}
+
+.subtitle {
+  margin: 0.35rem 0 0;
+  color: rgba(238, 242, 246, 0.65);
+  font-size: 0.95rem;
+}
+
+.tableSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.tableToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  background: rgba(7, 10, 14, 0.72);
+  color: inherit;
+  padding: 0.75rem 0.9rem;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.tableToggle:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tableToggleIcon {
+  width: 1rem;
+  color: rgba(238, 242, 246, 0.75);
+}
+
+.tableToggleMeta {
+  margin-left: 0.5rem;
+  color: rgba(238, 242, 246, 0.55);
+  font-size: 0.9rem;
+}
+
+.tableToggleAction {
+  margin-left: auto;
+  color: rgba(238, 242, 246, 0.7);
+  font-size: 0.85rem;
+}
+
+.tableCollapsedHint {
+  margin: 0;
+  color: rgba(238, 242, 246, 0.55);
+  font-size: 0.9rem;
+}
+
+.tableWrap {
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  background: rgba(7, 10, 14, 0.55);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  white-space: nowrap;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  background: #151b22;
+  color: rgba(238, 242, 246, 0.78);
+  font-weight: 600;
+}
+
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.muted {
+  color: rgba(238, 242, 246, 0.6);
+}
+
+.error {
+  color: #ff8f9f;
+  margin: 0 0 0.75rem;
+}
+
+.betaOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: transparent;
+  pointer-events: none;
+}
+
+.betaDialog {
+  pointer-events: auto;
+  width: min(100%, 20rem);
+  padding: 1rem 1.1rem 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.7rem;
+  background: rgba(16, 21, 27, 0.2);
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+.betaBody {
+  margin: 0 0 0.9rem;
+  color: #eef2f6;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.betaButton {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  border-radius: 0.45rem;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+}

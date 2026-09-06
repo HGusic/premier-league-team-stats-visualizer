@@ -1,0 +1,161 @@
+.card {
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  background: rgba(7, 10, 14, 0.45);
+  padding: 0.75rem 0.7rem 0.65rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.title {
+  margin: 0 0 0.15rem;
+  font-size: 0.98rem;
+  font-weight: 650;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.empty {
+  margin: 0.75rem 0 0;
+  color: rgba(238, 242, 246, 0.55);
+  font-size: 0.85rem;
+}
+
+.chartWrap {
+  width: 100%;
+  min-height: 300px;
+  margin: 0;
+  overflow: visible;
+}
+
+.legend {
+  list-style: none;
+  margin: 0;
+  padding: 0.02rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.legend li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  font-size: 0.8rem;
+  color: rgba(238, 242, 246, 0.78);
+}
+
+.legend strong {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.statHeading {
+  display: inline;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.rankPill {
+  display: inline-block;
+  margin-right: 0.2rem;
+  padding: 0.08rem 0.4rem;
+  border-radius: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  vertical-align: middle;
+  color: #0b0f14;
+}
+
+.rankGold {
+  background-image: linear-gradient(
+    115deg,
+    #8a6914 0%,
+    #f0d060 18%,
+    #fff6c8 32%,
+    #c9a227 48%,
+    #ffe9a0 62%,
+    #a67c1a 78%,
+    #f5d56a 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  color: #2a1f05;
+  text-shadow: 0 1px 0 rgba(255, 245, 200, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(255, 220, 120, 0.55),
+    0 0 10px rgba(255, 196, 64, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  animation: goldShine 2.6s ease-in-out infinite;
+}
+
+@keyframes goldShine {
+  0%,
+  40% {
+    background-position: 0% 50%;
+  }
+  70%,
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.rankDarkGreen {
+  background: #1f6b3a;
+  color: #e8fff0;
+}
+
+.rankLightGreen {
+  background: #7dce8f;
+  color: #102416;
+}
+
+.rankYellow {
+  background: #c4b03a;
+  color: #2a2205;
+}
+
+.rankOrange {
+  background: #e0893a;
+  color: #1f1205;
+}
+
+.rankRed {
+  background: #d64545;
+  color: #fff5f5;
+}
+
+.meta {
+  color: rgba(238, 242, 246, 0.5);
+  font-size: 0.74rem;
+}
+
+.compare {
+  color: rgba(238, 242, 246, 0.62);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tooltip {
+  background: rgba(10, 14, 18, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.7rem;
+  color: #eef2f6;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.tooltipTitle {
+  font-weight: 650;
+  margin-bottom: 0.2rem;
+}

@@ -1,0 +1,90 @@
+.section {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.85rem;
+  background: rgba(7, 10, 14, 0.55);
+  overflow: hidden;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.section:has(.body) .toggle {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.toggle:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.toggleIcon {
+  width: 1rem;
+  color: rgba(238, 242, 246, 0.75);
+}
+
+.toggleTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.toggleAction {
+  margin-left: auto;
+  color: rgba(238, 242, 246, 0.7);
+  font-size: 0.85rem;
+}
+
+.body {
+  width: 100%;
+  padding: 0.85rem;
+  box-sizing: border-box;
+}
+
+.radarRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.radarRowPair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.radarRowTriple {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Phone: fixed 2×2 for four-profile rows. Pair/triple stay responsive. */
+@media (max-width: 768px) {
+  .radarRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .radarRowTriple {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
