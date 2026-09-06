@@ -78,13 +78,11 @@
   width: 100%;
 }
 
-/* Phone: fixed 2×2 for four-profile rows. Pair/triple stay responsive. */
+/* Phone: one radar per row. */
 @media (max-width: 768px) {
-  .radarRow {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
+  .radarRow,
+  .radarRowPair,
   .radarRowTriple {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
   }
 }
