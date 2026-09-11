@@ -2,6 +2,8 @@
 
 Local-first app that ingests Premier League club stats from ESPN, stores season snapshots in SQLite, and visualizes ranked radar profiles in a Next.js UI.
 
+For system design, data flow, and module layout, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 ## Stack
 
 | Layer | Tech |
@@ -75,67 +77,6 @@ The Next.js dev server **rewrites** `/api/*` and `/health` to the backend (`API_
 | --- | --- | --- |
 | `API_PROXY_TARGET` | Backend origin for Next rewrites (server-side) | `http://127.0.0.1:8000` |
 | `NEXT_PUBLIC_API_BASE` | Browser API base URL; leave empty to use same-origin `/api` via rewrites | empty |
-
-## Architecture
-
-```
-┌─────────────────────┐     rewrite /api/*      ┌──────────────────────┐
-│  Next.js (3000)     │ ───────────────────────►│  FastAPI (8000)      │
-│  Team bar, radars,  │                         │  /api/teams          │
-│  profile sections   │◄── JSON profiles ───────│  /api/teams/{id}/…   │
-└─────────────────────┘                         │  /api/league/…       │
-                                                └──────────┬───────────┘
-                                                           │
-                                                ┌──────────▼───────────┐
-                                                │  SQLite app.db       │
-                                                │  teams, snapshots,   │
-                                                │  stats, aggregates   │
-                                                └──────────▲───────────┘
-                                                           │
-                                                ┌──────────┴───────────┐
-                                                │  Ingest CLI / HTTP   │
-                                                │  ESPN site APIs      │
-                                                └──────────────────────┘
-```
-
-### Data flow
-
-1. **Ingest** fetches club roster + per-team core statistics, team record, and league standings from ESPN.
-2. Rows are normalized into `team_stats` under a per-team **snapshot** (`team_stat_snapshots`), keyed by `team_espn_id` + season.
-3. **League ranks** and **min/max/avg aggregates** are computed across clubs (including lower-is-better metrics such as goals against).
-4. ESPN quirks are repaired where needed (e.g. save %, inaccurate crosses, penalty faced counts).
-5. The API serves:
-   - team list
-   - team profile (stats + header + composite radar ranks)
-   - league-average profile
-6. The UI maps fixed **metric sets** into radar sections (Defense, Offense, Possession, Passing, Goalkeeping, Set Pieces & Discipline). Composite profile ranks stay in sync via `PROFILE_METRIC_SETS` in `backend/app/ingest/__init__.py` and the matching frontend section components.
-
-### Key backend modules
-
-| Path | Role |
-| --- | --- |
-| `backend/app/main.py` | FastAPI routes, CORS, optional HTTP ingest gate |
-| `backend/app/db.py` | SQLite schema + connection |
-| `backend/app/ingest/espn.py` | ESPN HTTP clients (teams, stats, standings) |
-| `backend/app/ingest/__init__.py` | Ingest orchestration, ranks, aggregates, profile builders |
-| `backend/app/cli.py` | Offline ingest entrypoint for local/cron/AWS |
-
-### Key frontend modules
-
-| Path | Role |
-| --- | --- |
-| `frontend/src/app/page.tsx` | Shell, team selection, profile loading, beta notice |
-| `frontend/src/app/TeamBar.tsx` | Infinite horizontal club scroller |
-| `frontend/src/app/StatRadarProfile.tsx` | Shared radar + legend + 0→max scaling |
-| `frontend/src/app/*Section.tsx` | Section-specific metric definitions |
-| `frontend/next.config.ts` | Dev-origin allowlist + API rewrites |
-
-### Ranking model (short)
-
-- Individual stats get competition ranks across the 20 clubs.
-- Each radar **profile** averages its metric ranks into a unique 1–20 profile rank.
-- Each **section** averages its profile ranks into a section overall rank.
-- Radar fill uses a 0→league-max scale (inverted when lower is better), not the ordinal rank itself.
 
 ## Production notes
 
